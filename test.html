@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // URL of the API endpoint
+        const apiUrl = 'http://127.0.0.1:8000/share/private-text/T7NFjZ';
+
+        // Make the API call
+        fetch(apiUrl)
+            .then(response => {
+                // Log the entire response object for debugging
+                console.log('Response:', response);
+                // Check if the response is ok (status code 200-299)
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                // Parse the JSON from the response
+                return response.json();
+            })
+            .then(data => {
+                // Log the entire data object for debugging
+                console.log('Data:', data);
+                // Check if the status is success
+                if (data.status === "success") {
+                    // Loop through the data array
+                    data.data.forEach(item => {
+                        // Extract each piece of data
+                        const id = item.id;
+                        const textId = item.text.id;
+                        const textData = item.text.text;
+                        const createdAt = item.text.created_at;
+                        const setDuration = item.text.set_duration;
+
+                        // Log the extracted data
+                        console.log(`ID: ${id}`);
+                        console.log(`Text ID: ${textId}`);
+                        console.log(`Text: ${textData}`);
+                        console.log(`Created At: ${createdAt}`);
+                        console.log(`Set Duration: ${setDuration}`);
+                    });
+                } else {
+                    console.log('Status is not success:', data.status);
+                }
+            })
+            .catch(error => {
+                // Handle any errors that occur during the fetch operation
+                console.error('There was a problem with the fetch operation:', error);
+            })
