@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -o errexit
+set -o nounset
+
+# Correct usage of celery with the -A option
+watchmedo auto-restart -d ShareAPI/ -p "*.py" -- celery -A ShareAPI worker --loglevel=info

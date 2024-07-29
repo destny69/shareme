@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     "home",
     "rest_framework",
     "corsheaders",
+    "django_celery_results",
 ]
 
 MIDDLEWARE = [
@@ -64,7 +65,6 @@ WSGI_APPLICATION = "ShareAPI.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-
 
 
 # Password validation
