@@ -9,5 +9,6 @@ urlpatterns = [
     path("share/private-text/", HandlePrivateText.as_view()),
     path("share/public-files/", HandlePublicFiles.as_view()),
     path("share/private-files/", HandlePrivateFiles.as_view()),
+    path("share/private-files/<id>/", HandlePrivateFiles.as_view()),
     path("", FileListView.as_view()),
 ]

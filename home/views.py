@@ -113,6 +113,27 @@ class HandlePrivateText(APIView):
 
 
 class HandlePrivateFiles(APIView):
+
+    def get(self, request, id):
+        try:
+            private_file = PrivateFiles.objects.get(token=id)
+            serializer = PrivateFileSerializer()
+            return Response(
+                {
+                    "status": status.HTTP_200_OK,
+                    "message": "File retrieved successfully",
+                    "data": serializer.data,
+                },
+            )
+        except Exception as e:
+            return Response(
+                {
+                    "status": status.HTTP_404_NOT_FOUND,
+                    "message": "File not found",
+                    "error": str(e),
+                },
+            )
+
     def post(self, request):
         try:
             data = request.data
@@ -136,7 +157,7 @@ class HandlePrivateFiles(APIView):
                 status=status.HTTP_400_BAD_REQUEST,
             )
         except Exception as e:
-            print(e)
+
             return Response(
                 {
                     "status": status.HTTP_500_INTERNAL_SERVER_ERROR,
@@ -148,6 +169,27 @@ class HandlePrivateFiles(APIView):
 
 
 class HandlePublicFiles(APIView):
+    def get(self, request):
+        try:
+            files = PublicFiles.objects.all()
+            serializer = PublicFileSerializer(files, many=True)
+            return Response(
+                {
+                    "status": status.HTTP_200_OK,
+                    "message": "Files retrieved successfully",
+                    "data": serializer.data,
+                },
+            )
+        except Exception as e:
+            print(e)
+            return Response(
+                {
+                    "status": status.HTTP_500_INTERNAL_SERVER_ERROR,
+                    "message": "An error occurred",
+                    "error": str(e),
+                },
+            )
+
     def post(self, request):
         try:
             data = request.data
