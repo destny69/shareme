@@ -20,7 +20,7 @@ def get_upload_path(instance, filename):
 class Files(models.Model):
     folder = models.ForeignKey(Folder, on_delete=models.CASCADE)
     file = models.FileField(upload_to=get_upload_path)
-    created_at = models.DateField(auto_now=True)
+    created_at = models.DateTimeField(auto_now=True)
 
 
 class Textdata(models.Model):
