@@ -133,4 +133,10 @@ CORS_ALLOW_ALL_ORIGINS = True
 
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:8080",
+    "http://rdxshare.tech:8080",
+    "http://rdxshare.tech",
+    "http://www.rdxshare.tech:8080",
+    "http://www.rdxshare.tech",
+    "http://206.189.140.178:8080/",
+    # settings.py
 ]
